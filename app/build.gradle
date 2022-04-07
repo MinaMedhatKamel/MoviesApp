@@ -49,47 +49,71 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    def core_version = "1.7.0"
+    def appcompat = "1.3.0"
+    def material_version = "1.4.0"
+    def constraint_layout_version = "2.0.4"
+    def navigation_version = "2.4.1"
+    def legacy_version = "1.0.0"
+    def junit_version = "4.13.2"
+    def junit_androidx_version = "1.1.3"
+    def espresso_version = "3.4.0"
+    def mockk_version = "1.12.3"
+    def lifecycle_extensions_version = "1.1.1"
+    def lifecycle_compiler_version = "1.1.1"
+    def retrofit2_version = "2.9.0"
+    def okhttp3_version = "4.9.0"
+    def coroutines_core_version = "1.5.0"
+    def coroutines_android_version = "1.4.3"
+    def androidx_lifecycle_extensions_version = "2.2.0"
+    def lifecycle_viewmodel_ktx_version = "2.5.0-alpha05"
+    def koin_version = "3.2.0-beta-1"
+    def glide_version = "4.13.0"
+    def glide_transformations_version = "4.3.0"
+    def gpuimage_version = "2.1.0"
+    def paging_version = "3.1.1"
+
+
+    implementation "androidx.core:core-ktx:$core_version"
+    implementation "androidx.appcompat:appcompat:$appcompat"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
     //navigations
-    implementation 'androidx.navigation:navigation-fragment:2.4.1'
-    implementation 'androidx.navigation:navigation-ui:2.4.1'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.navigation:navigation-fragment:$navigation_version"
+    implementation "androidx.navigation:navigation-ui:$navigation_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    implementation "androidx.legacy:legacy-support-v4:$legacy_version"
     //testing
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    testImplementation "io.mockk:mockk:1.12.3"
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$junit_androidx_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    testImplementation "io.mockk:mockk:$mockk_version"
     // Lifecycle components
-    implementation "android.arch.lifecycle:extensions:1.1.1"
-    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+    implementation "android.arch.lifecycle:extensions:$lifecycle_extensions_version"
+    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_compiler_version"
     // Retrofit dependencies
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
     // Retrofit Scalars Converter
-    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofit2_version"
     // Kotlin coroutines dependencies
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_core_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
 
     // ViewModel dependency
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-alpha05'
+    implementation "androidx.lifecycle:lifecycle-extensions:$androidx_lifecycle_extensions_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_viewmodel_ktx_version"
 
     // Koin
-    implementation "io.insert-koin:koin-android:3.2.0-beta-1"
-    //picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'com.github.bumptech.glide:glide:4.13.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
-    implementation 'jp.wasabeef:glide-transformations:4.3.0'
+    implementation "io.insert-koin:koin-android:$koin_version"
+
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    implementation "jp.wasabeef:glide-transformations:$glide_transformations_version"
     // If you want to use the GPU Filters
-    implementation 'jp.co.cyberagent.android:gpuimage:2.1.0'
+    implementation "jp.co.cyberagent.android:gpuimage:$gpuimage_version"
     //Paging
-    implementation "androidx.paging:paging-runtime-ktx:3.1.1"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 }
