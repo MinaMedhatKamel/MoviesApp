@@ -3,7 +3,7 @@ this is a task for nuegelb company
 
 ### Usecases
 - loading the configuration Api from the splash screen. [https://api.themoviedb.org/3/configuration]
-- save the configuration module using the shared prefrences to access it through the app modules.
+- save the configuration model using the SharedPreferences to access it through the app modules.
 - navigate to the list screen. fetching the movies with paging technices.
 <img width="200" alt="image" src="https://user-images.githubusercontent.com/10800558/162219257-829c5add-3c9b-4344-93fc-2ef0f8f4defe.png">
 
