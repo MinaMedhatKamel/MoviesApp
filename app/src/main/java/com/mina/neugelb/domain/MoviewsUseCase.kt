@@ -4,7 +4,6 @@ package com.mina.neugelb.domain
 import com.mina.neugelb.BuildConfig
 import com.mina.neugelb.ConfigCash
 import com.mina.neugelb.data.model.*
-import com.mina.neugelb.data.repository.ConfigRepository
 import com.mina.neugelb.data.repository.MoviesRepository
 
 
@@ -21,7 +20,7 @@ class MoviesUseCaseImp(val moviesRpo: MoviesRepository, val configCash: ConfigCa
     override suspend fun getLatestMovies(page: Int): List<MovieListUiModel> {
         return moviesRpo.getLatestMovies(page).results.map {
             it.toMovieListUiModel(
-                configCash.getConfigCash()?.imgBaseUrlHQ ?: BuildConfig.DEFAULT_BASE_IMG_URL
+                configCash.getConfigCache()?.imgBaseUrlHQ ?: BuildConfig.DEFAULT_BASE_IMG_URL
             )
         }
     }

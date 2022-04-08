@@ -24,10 +24,10 @@ class ConfigUseCaseImp(val configRepo: ConfigRepository, val configCash: ConfigC
     }
 
     override suspend fun saveConfigData(configData: ConfigData) {
-        configCash.saveConfigCash(configData)
+        configCash.saveConfigCache(configData)
     }
 
     override suspend fun getSavedConfigData(): ConfigData? {
-        return configCash.getConfigCash()
+        return configCash.getConfigCache()
     }
 }

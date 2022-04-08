@@ -41,13 +41,13 @@ class ConfigUseCaseImpTest {
 
     @Test
     fun `test call getSavedConfigData should call getconfig from the cash`() {
-        coEvery { configCash.getConfigCash() } returns FakeConfigResponse.getFakeCashedData()
+        coEvery { configCash.getConfigCache() } returns FakeConfigResponse.getFakeCashedData()
 
         // when
         val data = runBlocking { configUseCase.getSavedConfigData() }
 
         //then
-        coVerify(exactly = 1) { configCash.getConfigCash() }
+        coVerify(exactly = 1) { configCash.getConfigCache() }
     }
 
 }

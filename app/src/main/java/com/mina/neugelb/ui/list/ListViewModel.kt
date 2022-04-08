@@ -26,7 +26,6 @@ class ListViewModel(private val moviesUseCase: MoviesUseCase) :
         emit(State.LoadingState)
         try {
             moviesData.collect {
-                emit(State.LoadingState)
                 emit(State.DataState(it))
             }
         } catch (e: Exception) {

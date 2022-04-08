@@ -63,7 +63,7 @@ class MoviesUseCaseImpTest {
     }
 
     private fun setupMock() {
-        coEvery { configCash.getConfigCash() } returns FakeConfigResponse.getFakeCashedData()
+        coEvery { configCash.getConfigCache() } returns FakeConfigResponse.getFakeCashedData()
         coEvery { moviesRepo.getLatestMovies(any()) } returns FakeMoviesResponse.getFakeMoviesResponse()
     }
 

@@ -2,13 +2,16 @@ package com.mina.neugelb.ui.list
 
 import android.R
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -16,6 +19,7 @@ import com.mina.neugelb.data.model.MovieListUiModel
 import com.mina.neugelb.databinding.FragmentListBinding
 import com.mina.neugelb.ui.State
 import com.mina.neugelb.ui.base.BaseFragment
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -26,7 +30,8 @@ class ListFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     private lateinit var moviesPagingAdapter: MoviesPagingAdapter
-
+    private var getAllMoviesJob: Job? = null
+    private var searchMoviesJob: Job? = null
 
     private val autoCompleteSugession = mutableListOf<String>()
 
@@ -93,38 +98,41 @@ class ListFragment : BaseFragment() {
     }
 
     private fun search(query: String) {
-        //moviesPagingAdapter.submitData(lifecycle, PagingData.empty())
+        moviesPagingAdapter.submitData(lifecycle, PagingData.empty())
+        getAllMoviesJob?.cancel()
         viewModel.filterData(query)
-        lifecycleScope.launch {
-            viewModel.moviesData.collect {
-                moviesPagingAdapter.submitData(lifecycle, it)
+        searchMoviesJob = lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.moviesData.collect {
+                    moviesPagingAdapter.submitData(lifecycle, it)
+                }
             }
         }
     }
 
     private fun getAllMovies() {
-        lifecycleScope.launch {
-            viewModel.getMovies()
-                .collect {
-                    when (it) {
-                        is State.DataState -> {
-                            binding
-                            moviesPagingAdapter.submitData(lifecycle, it.data)
-                            setupAutoCompleteData()
+        searchMoviesJob?.cancel()
+        getAllMoviesJob = lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.getMovies()
+                    .collect {
+                        when (it) {
+                            is State.DataState -> {
+                                binding
+                                moviesPagingAdapter.submitData(lifecycle, it.data)
+                                setupAutoCompleteData()
+                            }
+                            is State.ErrorState -> Toast.makeText(
+                                requireContext(),
+                                "error ${it.exception}",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            is State.LoadingState ->
+                                Log.d("listFragment", "getAllMovies: Loading")
                         }
-                        is State.ErrorState -> Toast.makeText(
-                            requireContext(),
-                            "error ${it.exception}",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        is State.LoadingState -> Toast.makeText(
-                            requireContext(),
-                            "Loading...",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
 
-                }
+                    }
+            }
         }
     }
 
